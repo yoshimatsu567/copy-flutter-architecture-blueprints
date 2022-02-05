@@ -42,7 +42,7 @@ class _$ArticleTearOff {
     );
   }
 
-  Article fromJson(Map<String, Object> json) {
+  Article fromJson(Map<String, Object?> json) {
     return Article.fromJson(json);
   }
 }
@@ -267,39 +267,24 @@ class _$_Article implements _Article {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Article &&
-            (identical(other.source, source) ||
-                const DeepCollectionEquality().equals(other.source, source)) &&
-            (identical(other.author, author) ||
-                const DeepCollectionEquality().equals(other.author, author)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
+        (other.runtimeType == runtimeType &&
+            other is _Article &&
+            (identical(other.source, source) || other.source == source) &&
+            (identical(other.author, author) || other.author == author) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
-                const DeepCollectionEquality()
-                    .equals(other.description, description)) &&
-            (identical(other.url, url) ||
-                const DeepCollectionEquality().equals(other.url, url)) &&
+                other.description == description) &&
+            (identical(other.url, url) || other.url == url) &&
             (identical(other.urlToImage, urlToImage) ||
-                const DeepCollectionEquality()
-                    .equals(other.urlToImage, urlToImage)) &&
+                other.urlToImage == urlToImage) &&
             (identical(other.publishedAt, publishedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.publishedAt, publishedAt)) &&
-            (identical(other.content, content) ||
-                const DeepCollectionEquality().equals(other.content, content)));
+                other.publishedAt == publishedAt) &&
+            (identical(other.content, content) || other.content == content));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(source) ^
-      const DeepCollectionEquality().hash(author) ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(description) ^
-      const DeepCollectionEquality().hash(url) ^
-      const DeepCollectionEquality().hash(urlToImage) ^
-      const DeepCollectionEquality().hash(publishedAt) ^
-      const DeepCollectionEquality().hash(content);
+  int get hashCode => Object.hash(runtimeType, source, author, title,
+      description, url, urlToImage, publishedAt, content);
 
   @JsonKey(ignore: true)
   @override
@@ -326,21 +311,21 @@ abstract class _Article implements Article {
   factory _Article.fromJson(Map<String, dynamic> json) = _$_Article.fromJson;
 
   @override
-  Source? get source => throw _privateConstructorUsedError;
+  Source? get source;
   @override
-  String? get author => throw _privateConstructorUsedError;
+  String? get author;
   @override
-  String? get title => throw _privateConstructorUsedError;
+  String? get title;
   @override
-  String? get description => throw _privateConstructorUsedError;
+  String? get description;
   @override
-  String? get url => throw _privateConstructorUsedError;
+  String? get url;
   @override
-  String? get urlToImage => throw _privateConstructorUsedError;
+  String? get urlToImage;
   @override
-  DateTime? get publishedAt => throw _privateConstructorUsedError;
+  DateTime? get publishedAt;
   @override
-  String? get content => throw _privateConstructorUsedError;
+  String? get content;
   @override
   @JsonKey(ignore: true)
   _$ArticleCopyWith<_Article> get copyWith =>

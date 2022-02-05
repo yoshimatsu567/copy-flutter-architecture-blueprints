@@ -32,7 +32,7 @@ class _$NewsTearOff {
     );
   }
 
-  News fromJson(Map<String, Object> json) {
+  News fromJson(Map<String, Object?> json) {
     return News.fromJson(json);
   }
 }
@@ -154,23 +154,17 @@ class _$_News implements _News {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _News &&
-            (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)) &&
+        (other.runtimeType == runtimeType &&
+            other is _News &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.totalResults, totalResults) ||
-                const DeepCollectionEquality()
-                    .equals(other.totalResults, totalResults)) &&
-            (identical(other.articles, articles) ||
-                const DeepCollectionEquality()
-                    .equals(other.articles, articles)));
+                other.totalResults == totalResults) &&
+            const DeepCollectionEquality().equals(other.articles, articles));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(status) ^
-      const DeepCollectionEquality().hash(totalResults) ^
-      const DeepCollectionEquality().hash(articles);
+  int get hashCode => Object.hash(runtimeType, status, totalResults,
+      const DeepCollectionEquality().hash(articles));
 
   @JsonKey(ignore: true)
   @override
@@ -192,11 +186,11 @@ abstract class _News implements News {
   factory _News.fromJson(Map<String, dynamic> json) = _$_News.fromJson;
 
   @override
-  String get status => throw _privateConstructorUsedError;
+  String get status;
   @override
-  int get totalResults => throw _privateConstructorUsedError;
+  int get totalResults;
   @override
-  List<Article> get articles => throw _privateConstructorUsedError;
+  List<Article> get articles;
   @override
   @JsonKey(ignore: true)
   _$NewsCopyWith<_News> get copyWith => throw _privateConstructorUsedError;
